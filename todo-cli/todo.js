@@ -1,5 +1,15 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable indent */
+/* eslint-disable quotes */
+
 const todoList = () => {
   all = [];
+  const formattedDate = (d) => {
+    return d.toISOString().split("T")[0];
+  };
+
+  const dateToday = new Date();
+  const today = formattedDate(dateToday);
 
   const add = (todoItem) => {
     all.push(todoItem);
