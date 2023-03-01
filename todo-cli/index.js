@@ -1,7 +1,8 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
 /* eslint-disable comma-dangle */
 /* eslint-disable indent */
 /* eslint-disable arrow-parens */
-/* eslint-disable linebreak-style */
 /* eslint-disable object-curly-spacing */
 /* eslint-disable quotes */
 
@@ -80,10 +81,10 @@ const deleteTodo = async (id) => {
 
 (async () => {
   await createTodo();
-  //   await countItems();
+  await countItems();
   await getAllTodos();
-  //   await getSingleTodo();
-  //   await updateTodo(2);
-  // await deleteTodo(2);
-  // await getAllTodos();
+  await getSingleTodo();
+  await updateTodo(2);
+  await deleteTodo(2);
+  await getAllTodos();
 })();
