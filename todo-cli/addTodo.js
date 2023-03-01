@@ -1,5 +1,11 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable object-curly-spacing */
+/* eslint-disable indent */
+/* eslint-disable max-len */
+/* eslint-disable quotes */
+
 // addTodo.js
-var argv = require("minimist")(process.argv.slice(2));
+const argv = require("minimist")(process.argv.slice(2));
 const db = require("./models/index");
 
 const createTodo = async (params) => {

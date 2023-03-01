@@ -1,3 +1,5 @@
+/* eslint-disable quotes */
+
 //  listTodos.js
 const db = require("./models/index");
 
