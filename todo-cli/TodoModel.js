@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable max-len */
 /* eslint-disable linebreak-style */
 /* eslint-disable require-jsdoc */
 /* eslint-disable comma-dangle */
@@ -11,6 +13,12 @@ const { sequelize } = require("./connectDB.js");
 class Todo extends Model {
   static async addTask(params) {
     return await Todo.create(params);
+  }
+
+  displayableString() {
+    return `${this.completed ? "[x] " : "[ ] "} ${this.id}. ${this.title} - ${
+      this.dueDate
+    }`;
   }
 }
 
