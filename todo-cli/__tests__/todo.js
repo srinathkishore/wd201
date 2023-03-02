@@ -97,10 +97,7 @@ describe("Tests for functions in todo.js", function () {
     const dueTodayItems = await db.Todo.dueToday();
     const aTodo = dueTodayItems[0];
     expect(aTodo.completed).toBe(false);
-    const displayValue = aTodo
-      .displayableString()
-      .replace(`${aTodo.dueDate}`, "")
-      .trim();
+    const displayValue = aTodo.displayableString();
     expect(displayValue).toBe(`${aTodo.id}. [ ] ${aTodo.title}`);
   });
 
@@ -110,10 +107,7 @@ describe("Tests for functions in todo.js", function () {
     expect(aTodo.completed).toBe(false);
     await db.Todo.markAsComplete(aTodo.id);
     await aTodo.reload();
-    const displayValue = aTodo
-      .displayableString()
-      .replace(`${aTodo.dueDate}`, "")
-      .trim();
+    const displayValue = aTodo.displayableString();
     expect(displayValue).toBe(`${aTodo.id}. [x] ${aTodo.title}`);
   });
 });
