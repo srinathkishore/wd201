@@ -11,8 +11,6 @@ app.get("/", function (request, response) {
 
 app.get("/todos", async function (_request, response) {
   console.log("Processing list of all Todos ...");
-  // FILL IN YOUR CODE HERE
-
   const todos = await Todo.findAll();
   console.log(todos);
   response.send(todos);
@@ -51,11 +49,18 @@ app.put("/todos/:id/markAsCompleted", async function (request, response) {
 
 app.delete("/todos/:id", async function (request, response) {
   console.log("We have to delete a Todo with ID: ", request.params.id);
-  // FILL IN YOUR CODE HERE
+  const todo = await Todo.findByPk(request.params.id);
 
-  // First, we have to query our database to delete a Todo by ID.
-  // Then, we have to respond back with true/false based on whether the Todo was deleted or not.
-  // response.send(true)
+  try {
+    if (!todo) {
+      return response.status(422).json({ message: "Todo not found" });
+    }
+    await todo.destroy();
+    return response.json(true);
+  } catch (error) {
+    console.log(error);
+    return response.status(422).json({ message: "Error deleting todo" });
+  }
 });
 
 module.exports = app;
