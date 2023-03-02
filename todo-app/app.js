@@ -53,7 +53,7 @@ app.delete("/todos/:id", async function (request, response) {
 
   try {
     if (!todo) {
-      return response.status(422).json({ message: "Todo not found" });
+      return response.json(false);
     }
     await todo.destroy();
     return response.json(true);
