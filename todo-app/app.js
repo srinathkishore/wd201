@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const { Todo } = require("./models");
 const bodyParser = require("body-parser");
+const { where } = require("sequelize");
 app.use(bodyParser.json());
 
 app.get("/", function (request, response) {
@@ -19,6 +20,9 @@ app.get("/todos", async function (_request, response) {
 app.get("/todos/:id", async function (request, response) {
   try {
     const todo = await Todo.findByPk(request.params.id);
+    if (!todo) {
+      return response.status(404).json(false);
+    }
     return response.json(todo);
   } catch (error) {
     console.log(error);
@@ -53,10 +57,10 @@ app.delete("/todos/:id", async function (request, response) {
 
   try {
     if (!todo) {
-      return response.json(false);
+      return response.status(404).json(false);
     }
     await todo.destroy();
-    return response.json(true);
+    return response.status(200).json(true);
   } catch (error) {
     console.log(error);
     return response.status(422).json({ message: "Error deleting todo" });
