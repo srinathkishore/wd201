@@ -1,5 +1,6 @@
 <script>
-  const allTodos = await Todo.findAll();
+  const { Todo } = require("./models");
+  const allTodos = Todo.getTodos();
 </script>
 <table>
   <% for(var i = 0; i < allTodos.length; i++){ %>
