@@ -1,11 +1,5 @@
-<script>
-  const { Todo } = require("./models");
-  const allTodos = Todo.getTodos();
-</script>
-<table>
-  <% for(var i = 0; i < allTodos.length; i++){ %>
-  <tr>
-    <td><%= allTodos[i].title %></td>
-  </tr>
-  <% } %>
-</table>
+<% for(var i = 0; i < allTodos.length; i++){ %>
+<tr>
+  <td><%= allTodos[i].title %></td>
+</tr>
+<% } %>
