@@ -9,51 +9,17 @@
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <div class="p-10">
-      <div>
-        <%- include('header.ejs') %>
-        <form action="">
-          <div class="flex gap-2">
-            <div class="flex-auto">
-              <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="What's next?"
-                class="border border-gray-300 text-gray-900 w-full rounded p-2 text-sm"
-              />
-            </div>
-
-            <div class="flex-auto">
-              <input
-                type="date"
-                id="dueDate"
-                name="dueDate"
-                class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm"
-              />
-            </div>
-
-            <div class="flex-auto">
-              <input
-                type="text"
-                id="completed"
-                name="completed"
-                class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm"
-              />
-            </div>
-
-            <div class="flex-none">
-              <button
-                type="submit"
-                class="bg-green-600 text-white px-5 py-2 rounded"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </form>
-        <%- include('todos.ejs') %>
-      </div>
+    <div>
+      <%- include("header.ejs") %>
+      <hr />
+      <form action="">
+        <input type="text" name="" id="" placeholder="What's next?" />
+        <br />
+        <input type="date" name="" id="" />
+        <br />
+        <input type="submit" name="" id="" value="Add Todo" />
+      </form>
+      <%- include("todo.ejs") %>
     </div>
   </body>
 </html>
