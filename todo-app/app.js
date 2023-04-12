@@ -15,6 +15,7 @@ app.get("/", async (request, response) => {
   if (request.accepts("html")) {
     response.render("index", { allTodos });
   } else {
+    console.log(allTodos);
     response.json(allTodos);
   }
 });
@@ -24,7 +25,7 @@ app.use(express.static(path.join(dirname, "public")));
 app.get("/todos", async function (_request, response) {
   console.log("Processing list of all Todos ...");
   const todos = await Todo.findAll();
-  console.log(todos);
+  response.render("todos", { todos: todos });
   response.send(todos);
 });
 

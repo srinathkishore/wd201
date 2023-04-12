@@ -1,24 +1,23 @@
 <div>
+  <% overdueTodos = todo.overdue() %> <% overdueCount = 0 %>
   <h5>Overdue (<span id="count-overdue"><%= overdueCount %></span>)</h5>
   <ul>
-    <% overdueCount = 0 %> <% overdueTodos.forEach(todo => { %> <%
-    overdueCount++; %>
+    <% overdueTodos.forEach(todo => { %> <% overdueCount++; %>
     <li><%= todo.title %></li>
     <% }) %>
   </ul>
-
+  <% dueTodayCount = 0 %>
   <h5>Due Today (<span id="count-due-today"><%= dueTodayCount %></span>)</h5>
   <ul>
-    <% dueTodayCount = 0 %> <% dueTodayTodos.forEach(todo => { %> <%
-    dueTodayCount++; %>
+    <% dueTodayTodos.forEach(todo => { %> <% dueTodayCount++; %>
     <li><%= todo.title %></li>
     <% }) %>
   </ul>
 
+  <% dueLaterCount = 0 %>
   <h5>Due Later (<span id="count-due-later"><%= dueLaterCount %></span>)</h5>
   <ul>
-    <% dueLaterCount = 0 %> <% dueLaterTodos.forEach(todo => { %> <%
-    dueLaterCount++; %>
+    <% dueLaterTodos.forEach(todo => { %> <% dueLaterCount++; %>
     <li><%= todo.title %></li>
     <% }) %>
   </ul>
