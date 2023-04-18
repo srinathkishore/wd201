@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const express = require("express");
 const app = express();
 const { Todo } = require("./models");
@@ -37,7 +36,7 @@ app.get("/todos", async (request, res) => {
 app.post("/todos", async (request, res) => {
   console.log("Body : ", request.body);
   try {
-    const todo = await Todo.addTodo({
+    await Todo.addTodo({
       title: request.body.title,
       dueDate: request.body.dueDate,
       completed: false,
