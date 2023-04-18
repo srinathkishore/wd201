@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 const express = require("express");
 const app = express();
 const { Todo } = require("./models");
 const bodyParser = require("body-parser");
 const path = require("path");
 const { response } = require("express");
-
 app.use(bodyParser.json());
+app.use(express.urlencoded({ encoded: false }));
+
 app.set("view engine", "ejs");
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname + "public")));
@@ -40,7 +42,7 @@ app.post("/todos", async (request, res) => {
       dueDate: request.body.dueDate,
       completed: false,
     });
-    return res.json(todo);
+    return res.redirect("/");
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);
