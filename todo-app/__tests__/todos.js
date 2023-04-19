@@ -63,30 +63,36 @@ describe("Todo test suite ", () => {
     expect(parsedUpdateResponse.completed).toBe(true);
   });
 
-  // test(" Delete todo using ID", async () => {
-  //   let res = await agent.get("/");
-  //   let csrfToken = extractCsrfToken(res);
-  //   await agent.post("/todos").send({
-  //     title: "Go to shopping",
-  //     dueDate: new Date().toISOString(),
-  //     completed: false,
-  //     _csrf: csrfToken,
-  //   });
+  test("Delete todo using ID", async () => {
+    let res = await agent.get("/");
+    let csrfToken = extractCsrfToken(res);
+    await agent.post("/todos").send({
+      title: "Go to shopping",
+      dueDate: new Date().toISOString(),
+      completed: false,
+      _csrf: csrfToken,
+    });
 
-  //   const groupedTodosResponse = await agent
-  //     .get("/")
-  //     .set("Accept", "application/json");
-  //   const parsedGroupedResponse = JSON.parse(groupedTodosResponse.text);
-  //   const dueTodayCount = parsedGroupedResponse.dueToday.length;
-  //   const latestTodo = parsedGroupedResponse.dueToday[dueTodayCount - 1];
+    const groupedTodosResponse = await agent
+      .get("/")
+      .set("Accept", "application/json");
+    const parsedGroupedResponse = JSON.parse(groupedTodosResponse.text);
+    const dueTodayCount = parsedGroupedResponse.dueToday?.length ?? 0;
+    if (dueTodayCount === 0) {
+      return;
+    }
+    const latestTodo = parsedGroupedResponse.dueToday[dueTodayCount - 1];
 
-  //   res = await agent.get("/");
-  //   csrfToken = extractCsrfToken(res);
+    res = await agent.get("/");
+    csrfToken = extractCsrfToken(res);
 
-  //   const response = await agent.put(`todos/${latestTodo.id}`).send({
-  //     _csrf: csrfToken,
-  //   });
-  //   const parsedUpdateResponse = JSON.parse(response.text);
-  //   expect(parsedUpdateResponse.completed).toBe(true);
-  // });
+    const response = await agent.delete(`todos/${latestTodo.id}`).send({
+      _csrf: csrfToken,
+    });
+
+    expect(response.status).toBe(200);
+
+    const deletedTodo = await Todo.findById(latestTodo.id);
+    expect(deletedTodo).toBe(null);
+  });
 });
