@@ -37,6 +37,11 @@ app.get("/", async (request, response) => {
   }
 });
 
+app.get("/signup", (request, response) => {
+  response.render("signup"),
+    { title: "Signup", csrfToken: request.csrfToken() };
+});
+
 app.get("/todos", async (request, response) => {
   console.log("Todo list");
   try {
@@ -47,6 +52,7 @@ app.get("/todos", async (request, response) => {
     return response.status(422).json(error);
   }
 });
+
 app.get("/todos/:id", async function (request, response) {
   try {
     const todo = await Todo.findByPk(request.params.id);
