@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const request = require("supertest");
 var cheerio = require("cheerio");
@@ -11,16 +12,28 @@ function extractCsrfToken(res) {
   return $("[name=_csrf]").val();
 }
 
+const login = async (agent, username, password) => {
+  let res = await agent.get("/login");
+  let csrfToken = extractCsrfToken(res);
+  res = await agent.post("/session").send({
+    email: username,
+    password: password,
+    _csrf: csrfToken,
+  });
+};
+
 describe("Todo test suite ", () => {
   beforeAll(async () => {
     await db.sequelize.sync({ force: true });
     server = app.listen(4000, () => {});
     agent = request.agent(server);
   });
+
   afterAll(async () => {
     await db.sequelize.close();
     server.close();
   });
+
   test("Create new todo", async () => {
     const res = await agent.get("/");
     const csrfToken = extractCsrfToken(res);
